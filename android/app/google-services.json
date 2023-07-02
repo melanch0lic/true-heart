@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "634271633373",
+    "project_id": "true-heart-eeeb4",
+    "storage_bucket": "true-heart-eeeb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634271633373:android:eec51ee4d6b3b9f65d3034",
+        "android_client_info": {
+          "package_name": "com.example.true_heart_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634271633373-djfiu9uve9c087pj7b2uf9br8norch16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNMuAnIXcg0MM5ne6DkFGLnIqnxL1WETU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634271633373-djfiu9uve9c087pj7b2uf9br8norch16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
