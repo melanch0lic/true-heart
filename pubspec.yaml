@@ -1,5 +1,5 @@
 name: true_heart_app
-description: A new Flutter project.
+description: True Heart App.
 
 publish_to: 'none' 
 
@@ -11,8 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.14.0
+  firebase_core: ^2.15.0
   cloud_firestore: ^4.8.2
+  equatable: ^2.0.5
+  firebase_auth: ^4.6.0
+  flutter_bloc: ^8.0.0
+  flutter_secure_storage: ^8.0.0
+  hive: ^2.2.3
+  google_sign_in: ^6.1.5
+  formz: ^0.6.0
 
 dev_dependencies:
   flutter_test:

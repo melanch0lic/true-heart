@@ -29,6 +29,13 @@
             {
               "client_id": "634271633373-djfiu9uve9c087pj7b2uf9br8norch16.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "634271633373-2d02gguadb2bi6eh5oc5t4hll8ut8j5u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trueHeartApp"
+              }
             }
           ]
         }
