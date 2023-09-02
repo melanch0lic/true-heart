@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:true_heart_app/core/util/cache_client.dart';
-import 'package:true_heart_app/features/auth/data/models/user.dart';
-import 'package:true_heart_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
+import '../../domain/repository/auth_repository.dart';
+import '../models/user.dart';
 import '../src/auth_exceptions.dart';
 
 class AuthRepositoryImplementation implements AuthRepository {
@@ -71,6 +71,7 @@ class AuthRepositoryImplementation implements AuthRepository {
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
+  @override
   Future<void> logInWithGoogle() async {
     try {
       late final firebase_auth.AuthCredential credential;

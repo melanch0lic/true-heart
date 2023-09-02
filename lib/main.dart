@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/util/bloc_observer.dart';
-import 'features/auth/data/repository/auth_implementation.dart';
+import 'data/repository/auth_implementation.dart';
 import 'firebase_options.dart';
 import 'true_heart_app.dart';
 

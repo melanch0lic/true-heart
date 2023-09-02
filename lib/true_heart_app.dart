@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:true_heart_app/features/auth/domain/repository/auth_repository.dart';
-import 'package:true_heart_app/pages/login_page/login_page.dart';
 
 import 'app_bloc.dart';
 import 'app_state.dart';
-import 'pages/home_page/home_page.dart';
+import 'domain/repository/auth_repository.dart';
+import 'presentation/pages/home_page/home_page.dart';
+import 'presentation/pages/login_page/login_page.dart';
 
 class TrueHeartApp extends StatelessWidget {
   final AuthRepository authRepository;

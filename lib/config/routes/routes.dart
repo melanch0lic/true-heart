@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:true_heart_app/pages/login_page/login_page.dart';
-
 import '../../app_state.dart';
-import '../../pages/home_page/home_page.dart';
+
+import '../../presentation/pages/home_page/home_page.dart';
+import '../../presentation/pages/login_page/login_page.dart';
 
 List<Page<dynamic>> onGenerateAppViewPages(
   AppStatus state,

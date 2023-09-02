@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'features/auth/data/models/user.dart';
+import 'data/models/user.dart';
 
 enum AppStatus {
   authenticated,

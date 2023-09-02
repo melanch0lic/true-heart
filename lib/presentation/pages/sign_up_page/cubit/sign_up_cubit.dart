@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:formz/formz.dart';
-import 'package:true_heart_app/features/auth/domain/repository/auth_repository.dart';
 
-import '../../../features/auth/data/src/auth_exceptions.dart';
-import '../../../features/auth/domain/entities/confirmed_password.dart';
-import '../../../features/auth/domain/entities/email.dart';
-import '../../../features/auth/domain/entities/password.dart';
+import '../../../../data/src/auth_exceptions.dart';
+import '../../../../domain/entities/confirmed_password.dart';
+import '../../../../domain/entities/email.dart';
+import '../../../../domain/entities/password.dart';
+import '../../../../domain/repository/auth_repository.dart';
 
 part 'sign_up_state.dart';
 
@@ -17,6 +17,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   final AuthRepository _authenticationRepository;
 
   void emailChanged(String value) {
+    if (value.isEmpty) {
+      emit(state.copyWith(email: const Email.pure(), isValid: false));
+      return;
+    }
     final email = Email.dirty(value);
     emit(
       state.copyWith(
@@ -31,6 +35,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   void passwordChanged(String value) {
+    if (value.isEmpty) {
+      emit(state.copyWith(
+          password: const Password.pure(),
+          confirmedPassword: state.confirmedPassword.value.isEmpty ? const ConfirmedPassword.pure() : null,
+          isValid: false));
+      return;
+    }
     final password = Password.dirty(value);
     final confirmedPassword = ConfirmedPassword.dirty(
       password: password.value,
