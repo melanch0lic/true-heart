@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:true_heart_app/features/auth/domain/repository/auth_repository.dart';
-
+import '../../../domain/repository/auth_repository.dart';
 import 'components/sign_up_form.dart';
 import 'cubit/sign_up_cubit.dart';
 

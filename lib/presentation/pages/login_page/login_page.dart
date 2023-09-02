@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:true_heart_app/features/auth/domain/repository/auth_repository.dart';
-import 'package:true_heart_app/pages/sign_up_page/sign_up_page.dart';
 
+import '../../../domain/repository/auth_repository.dart';
+import '../sign_up_page/sign_up_page.dart';
 import 'cubit/login_cubit.dart';
 
 class LoginPage extends StatelessWidget {
@@ -16,6 +16,7 @@ class LoginPage extends StatelessWidget {
       body: BlocProvider(
         create: (context) => LoginCubit(context.read<AuthRepository>()),
         child: BlocListener<LoginCubit, LoginState>(
+          listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if (state.status.isFailure) {
               ScaffoldMessenger.of(context)
@@ -92,9 +93,10 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            labelText: 'Email',
             helperText: '',
-            errorText: state.email.displayError != null ? 'invalid email' : null,
+            errorText: state.email.displayError != null ? 'Invalid email' : null,
           ),
         );
       },
@@ -113,9 +115,10 @@ class _PasswordInput extends StatelessWidget {
           onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            labelText: 'Password',
             helperText: '',
-            errorText: state.password.displayError != null ? 'invalid password' : null,
+            errorText: state.password.displayError != null ? 'Invalid password' : null,
           ),
         );
       },
