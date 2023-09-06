@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:true_heart_app/domain/repository/questions_repository.dart';
 
 import 'app_bloc.dart';
 import 'app_state.dart';
@@ -9,13 +10,17 @@ import 'presentation/pages/login_page/login_page.dart';
 
 class TrueHeartApp extends StatelessWidget {
   final AuthRepository authRepository;
-  const TrueHeartApp({super.key, required this.authRepository});
+  final QuestionsRepository questionsRepository;
+  const TrueHeartApp({super.key, required this.authRepository, required this.questionsRepository});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: authRepository),
+        RepositoryProvider.value(value: questionsRepository)
+      ],
       child: BlocProvider(
         create: (_) => AppBloc(authenticationRepository: authRepository),
         child: MaterialApp(
