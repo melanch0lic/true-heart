@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return BlocProvider(
-      create: (context) => HomeCubit(context.read<QuestionsRepository>()),
+      create: (context) => HomeCubit(context.read<QuestionsRepository>(), user.id),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(user.email ?? '', style: textTheme.titleLarge),
                     const SizedBox(height: 4),
-                    Text(user.name ?? '', style: textTheme.headlineSmall),
+                    Text(user.name ?? '', style: textTheme.headlineSmall!),
                     const SizedBox(height: 12),
                     state.status == HomeStatus.loading
                         ? const CircularProgressIndicator()
@@ -54,7 +54,8 @@ class HomePage extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   state.questions[state.questionIndex].text,
-                                  style: textTheme.titleLarge,
+                                  style: textTheme.titleLarge!
+                                      .copyWith(color: state.isAnswered ? Colors.grey.withOpacity(0.5) : Colors.black),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -84,7 +85,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         ElevatedButton(onPressed: () {}, child: const Text('Другие ответы')),
                         ElevatedButton(
-                            onPressed: () => context.read<HomeCubit>().onAnswerButtonPressed(),
+                            onPressed: () => context.read<HomeCubit>().onAnswerDialogButtonPressed(),
                             child: const Text('Ответить на вопрос')),
                       ],
                     ),
@@ -101,12 +102,14 @@ class HomePage extends StatelessWidget {
                                 shape: const CircleBorder(),
                               ),
                               child: IconButton(
-                                  onPressed: () => context.read<HomeCubit>().onAnswerButtonUnpressed(),
+                                  onPressed: () => context.read<HomeCubit>().onAnswerDialogButtonUnpressed(),
                                   icon: const Icon(Icons.close)),
                             ),
                           ),
                           const SizedBox(height: 4),
                           TextField(
+                            controller: context.read<HomeCubit>().answerTextController,
+                            onChanged: context.read<HomeCubit>().onAnswerTextChanged,
                             decoration:
                                 InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                             keyboardType: TextInputType.multiline,
@@ -114,7 +117,16 @@ class HomePage extends StatelessWidget {
                             maxLines: 5,
                           ),
                           const SizedBox(height: 4),
-                          ElevatedButton(onPressed: () {}, child: const Text('Отправить'))
+                          ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<HomeCubit>()
+                                    .onSendAnswerPressed(
+                                        user.id, state.questions[state.questionIndex].id, state.answerText)
+                                    .then((value) => context.read<HomeCubit>().answerTextController.clear())
+                                    .onError((error, stackTrace) => null);
+                              },
+                              child: const Text('Отправить'))
                         ],
                       )),
                   duration: const Duration(milliseconds: 300),
